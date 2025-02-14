@@ -7,7 +7,7 @@ module AddressValidate
       response = Net::HTTP.post_form(URI(AddressValidate.verify_url),
         { API: 'Verify',
           XML: Request.build_xml(data) })
-      Response.new(response.body)
+      AddressValidate::API::Response.new(response.code == "200" ? response.body : "#{response.code} #{response.message}")
     end
   end
 end

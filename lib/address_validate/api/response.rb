@@ -5,6 +5,8 @@ module AddressValidate
 
       def initialize(response_body)
         @response_body = Ox.parse(response_body)
+      rescue Ox::ParseError => e
+        @errors = "Error converting result: #{e.message} (#{response_body})"
       end
 
       def success?
